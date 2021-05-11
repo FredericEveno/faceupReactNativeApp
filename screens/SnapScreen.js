@@ -3,9 +3,10 @@ import {Text, View, Button} from 'react-native';
 
 function SnapScreen(props) {
   return(
-    <View>
-      <Text>SnapScreen</Text>
-      <Button title='To GaleryScreen' onPress={ () => props.navigation.navigate('GaleryScreen') } />
+    <View style={{flex:1, marginTop:30}}>
+      <Text>This is SnapScreen</Text>
+      <Button title='To GalleryScreen' 
+            onPress={ () => props.navigation.navigate('BottomNavigator', {screen: 'Gallery'}) } />
     </View>
   )
 }
