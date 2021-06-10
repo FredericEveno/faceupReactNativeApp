@@ -127,18 +127,20 @@ function CameraFocus(props) {
 
                 var responseToJson = await backendResponse.json();
 
-                // console.log('responseToJson : ', responseToJson)
+                console.log('responseToJson : ', responseToJson)
+                console.log('responseToJson.url : ', responseToJson.url)
 
                 if (responseToJson.result) {
                   setLoadingMessage('OK !');
-                  props.addImageToList(responseToJson.response.secure_url); /* je récupère
-                  ma props addImageToList fournie par le parent SnapScreen, à travers le composant
-                  <CameraFocus>*/
+                  props.addImageToList(responseToJson.url); 
+                  /* je récupère ma props addImageToList fournie par le parent SnapScreen, 
+                  à travers le composant <CameraFocus>*/
                   setVisible(false);
                 } else {
                   setLoadingMessage('NOK !');
+                  setVisible(false);
                 }
-                
+
               }
             }}
           />
@@ -169,8 +171,10 @@ function SnapScreen(props) {
 
   var CameraIfFocused;
   if (isFocused) {
-    CameraIfFocused = <CameraFocus addImageToList={props.storeImagesList}/>; /* On envoie la props
-    au composant enfant CameraFocus, qui contient l'Url de l'image dans le bouton */
+    
+    CameraIfFocused = <CameraFocus addImageToList={props.storeImagesList}/>; 
+    /* On envoie la props au composant enfant CameraFocus, 
+    qui contient l'Url de l'image dans le bouton */
   }
 
   if (hasPermission) {
@@ -200,6 +204,7 @@ function SnapScreen(props) {
 function mapDispatchToProps(dispatch) {
   return {
     storeImagesList: function (url) {
+      console.log('coucou !')
       console.log('redux#2 url : ', url);
       dispatch( {type: 'addUrl', url: url} )
     }

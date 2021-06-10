@@ -66,24 +66,40 @@ function GalleryScreen(props) {
 
     console.log('props.imagesList : ', props.imagesList);
  
-    let cardsList2 = props.imagesList.map( (image, index) => {
+    let cardsList = props.imagesList.map((data, i) => {
+
+      var badgeGlasses;
+      if (data.glasses) {
+        badgeGlasses = <Badge status="success" value="lunette" />
+      }
+      var badgeBeard;
+      if (data.beard) {
+        badgeBeard = <Badge status="success" value="barbe" />;
+      }
+      var badgeHappy;
+      if (data.happy) {
+        badgeHappy = <Badge status="success" value="joyeux" />;
+      }
+      var badgeHair;
+      if (data.hairColor) {
+        badgeHair = <Badge status="success" value={data.hairColor} />
+      }
+  
       return (
-        <Card key={index}>
+        <Card key={i}>
           <Card.Image
-            style={{width:'100%', height:150, marginBottom:10}}
-            resizeMode="cover"
-            source={{uri: image}}
-            >
-            </Card.Image>
-            <Badge value='Bob' status="success" />
-            <Badge value='Male' status="success" />
-            <Badge value='Dominant' status="success" />
-            <Badge value='Fourni' status="success" />
-            <Badge value='46' status="success" />
-            <Badge value='Bogoss' status="success" />
+            style={{ width: '100%', height: 170, marginBottom: 10 }}
+            source={{ uri: data.url }}
+          />
+          <Badge status="success" value={data.gender} />
+          <Badge status="success" value={data.age} />
+          {badgeGlasses}
+          {badgeBeard}
+          {badgeHappy}
+          {badgeHair}
         </Card>
       );
-    })
+    });
 
   return(
     
@@ -95,7 +111,7 @@ function GalleryScreen(props) {
 
       <ScrollView>
 
-        {cardsList2}
+        {cardsList1}
 
       </ScrollView>
 
